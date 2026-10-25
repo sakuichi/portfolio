@@ -9,13 +9,14 @@
 flowchart LR
   W["作品データ<br>data/works.js<br>window.WORKS"] --> L
   N["お知らせ<br>data/news.js<br>window.NEWS"] --> L
-  L["分類・NEW判定・更新履歴の組み立て<br>js/logic.js"] -->|"カテゴリ別の作品配列<br>NEWかどうか<br>日付順の更新履歴"| M
+  L["分類・NEW判定・更新履歴・共有URLの組み立て<br>js/logic.js"] -->|"カテゴリ別の作品配列<br>NEWかどうか<br>日付順の更新履歴<br>各SNSの共有URL"| M
   M["HTMLへの描画<br>js/main.js"] --> I
   I["トップページ<br>index.html"]
   C["見た目<br>css/style.css"] --> I
   T["サムネイル画像<br>GitHub Pages作品：各作品のOGP画像（sakuichi.github.io/各リポジトリ/）<br>unityroom作品：images/thumbs/"] --> I
   I -->|外部リンク| U["unityroom の各作品"]
   I -->|外部リンク| S["Web作品の各URL"]
+  I -->|"共有ボタン（押したときだけ）"| SNS["X・LINE・Bluesky・note の投稿画面<br>／リンクのコピー／端末の共有メニュー"]
   X["ロジックのテスト<br>tests/logic.test.js"] -.->|node --test| L
   O["OGP画像の元<br>tools/ogp.html"] -.->|Edge で 1200x630 に撮影| P["OGP画像<br>ogp.png"]
   P -->|"og:image（SNSでシェアしたときのカード）"| I
@@ -54,3 +55,4 @@ msedge --headless --hide-scrollbars --window-size=1200,630 --screenshot=ogp.png 
 
 - 公開日から30日未満の作品に「NEW!」を付ける（`js/logic.js` の `NEW_DAYS`）。
 - 更新履歴は「作品の公開」と「お知らせ」を新しい順に混ぜて表示する。
+- 共有ボタンはSNS公式のスクリプトを使わず、ただのリンクにする（押すまでSNSに何も送らない）。共有するURLは常に `https://sakuichi.github.io/portfolio/`（`js/main.js` の `SITE_URL`）。

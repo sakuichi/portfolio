@@ -1,8 +1,13 @@
 // js/logic.js で組み立てたデータを HTML に描画する
 (function () {
-  const { isNew, worksByCategory, latestWorks, buildHistory, formatDate } = window.Logic;
+  const { isNew, worksByCategory, latestWorks, buildHistory, buildShareUrls, formatDate } =
+    window.Logic;
   const works = window.WORKS || [];
   const news = window.NEWS || [];
+
+  // 共有するのは常に公開URL（ローカルで開いたときに file:// を共有しないため）
+  const SITE_URL = "https://sakuichi.github.io/portfolio/";
+  const SHARE_TEXT = "おもしろゲーム倉庫 ～ 遊んで笑えるゲームがいっぱい！ ～";
 
   function el(tag, className, text) {
     const node = document.createElement(tag);
@@ -77,12 +82,63 @@
     });
   }
 
+  function showShareMessage(text) {
+    const message = document.getElementById("share-message");
+    message.textContent = text;
+    clearTimeout(showShareMessage.timer);
+    showShareMessage.timer = setTimeout(() => (message.textContent = ""), 3000);
+  }
+
+  // Clipboard API が使えない環境（古いブラウザなど）では execCommand で代用する
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve, reject) => {
+      const area = el("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const ok = document.execCommand("copy");
+      area.remove();
+      ok ? resolve() : reject(new Error("copy failed"));
+    });
+  }
+
+  function setupShare() {
+    const urls = buildShareUrls(SITE_URL, SHARE_TEXT);
+    document.getElementById("share-x").href = urls.x;
+    document.getElementById("share-line").href = urls.line;
+    document.getElementById("share-bluesky").href = urls.bluesky;
+    document.getElementById("share-note").href = urls.note;
+
+    document.getElementById("share-copy").addEventListener("click", () => {
+      copyText(SITE_URL).then(
+        () => showShareMessage("コピーしました！"),
+        () => showShareMessage("コピーできませんでした…")
+      );
+    });
+
+    // 端末の共有メニュー（主にスマホ）。対応していない環境ではボタンを出さない
+    if (navigator.share) {
+      const nativeButton = document.getElementById("share-native");
+      nativeButton.hidden = false;
+      nativeButton.addEventListener("click", () => {
+        navigator.share({ title: document.title, text: SHARE_TEXT, url: SITE_URL }).catch(() => {});
+      });
+    }
+  }
+
   const history = buildHistory(works, news);
 
   renderWorkList("latest-list", latestWorks(works, 3));
   renderWorkList("game-list", worksByCategory(works, "game"));
   renderWorkList("web-list", worksByCategory(works, "web"));
   renderHistory(history);
+  setupShare();
 
   document.getElementById("work-count").textContent = works.length;
   if (history.length > 0) {

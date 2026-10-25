@@ -159,6 +159,54 @@ a:hover {
   padding: 2px 0;
 }
 
+/* 共有ボタン（昔のフォームボタン風） */
+
+.share {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+}
+
+.share-button {
+  display: block;
+  padding: 3px 4px;
+  font: inherit;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  background: linear-gradient(#ffffff, #dddddd);
+  border: 2px outset #cccccc;
+  cursor: pointer;
+}
+
+.share-button:visited {
+  color: var(--text);
+}
+
+.share-button:hover {
+  color: var(--link-hover);
+  background: linear-gradient(#ffffee, #ffeebb);
+}
+
+.share-button:active {
+  border-style: inset;
+}
+
+.share-button[hidden] {
+  display: none;
+}
+
+.share-message {
+  min-height: 1.6em;
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--new);
+}
+
 .box-text {
   margin: 0;
   padding: 6px;
@@ -341,6 +389,21 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 4px 14px;
+  }
+
+  .share {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .share-button {
+    flex: 1 1 40%;
+    padding: 6px 4px;
+    font-size: 14px;
+  }
+
+  .share-message {
+    flex-basis: 100%;
   }
 
   .thumb {

@@ -44,11 +44,32 @@
     return releases.concat(news.map((n) => ({ date: n.date, text: n.text }))).sort(byDateDesc);
   }
 
+  // 各SNSの投稿画面を開くURL（公式スクリプトは使わず、ただのリンクにする）
+  function buildShareUrls(pageUrl, text) {
+    const u = encodeURIComponent(pageUrl);
+    const t = encodeURIComponent(text);
+    return {
+      x: `https://x.com/intent/tweet?text=${t}&url=${u}`,
+      line: `https://social-plugins.line.me/lineit/share?url=${u}`,
+      bluesky: `https://bsky.app/intent/compose?text=${t}%20${u}`,
+      note: `https://note.com/intent/post?url=${u}`,
+    };
+  }
+
   function formatDate(dateStr) {
     return dateStr.replace(/-/g, "/");
   }
 
-  const api = { NEW_DAYS, CATEGORY_LABELS, isNew, worksByCategory, latestWorks, buildHistory, formatDate };
+  const api = {
+    NEW_DAYS,
+    CATEGORY_LABELS,
+    isNew,
+    worksByCategory,
+    latestWorks,
+    buildHistory,
+    buildShareUrls,
+    formatDate,
+  };
 
   if (typeof module !== "undefined" && module.exports) {
     module.exports = api;

@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { isNew, worksByCategory, latestWorks, buildHistory, formatDate } = require("../js/logic.js");
+const { isNew, worksByCategory, latestWorks, buildHistory, buildShareUrls, formatDate } = require("../js/logic.js");
 
 const today = new Date(2026, 9, 25); // 2026-10-25（ローカル時刻）
 
@@ -66,6 +66,30 @@ test("buildHistory: 作品公開とお知らせを新しい順に混ぜる", () 
     { date: "2026-09-01", text: "サイトを開設しました" },
     { date: "2026-08-01", text: "Webサイト『サイトB』を公開しました" },
   ]);
+});
+
+test("buildShareUrls: X・LINE・Bluesky の共有URLを、文言とURLをエンコードして組み立てる", () => {
+  const urls = buildShareUrls("https://example.com/a b/", "遊んで&笑える");
+  assert.equal(
+    urls.x,
+    "https://x.com/intent/tweet?text=%E9%81%8A%E3%82%93%E3%81%A7%26%E7%AC%91%E3%81%88%E3%82%8B&url=https%3A%2F%2Fexample.com%2Fa%20b%2F"
+  );
+  assert.equal(
+    urls.line,
+    "https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fexample.com%2Fa%20b%2F"
+  );
+  assert.equal(
+    urls.bluesky,
+    "https://bsky.app/intent/compose?text=%E9%81%8A%E3%82%93%E3%81%A7%26%E7%AC%91%E3%81%88%E3%82%8B%20https%3A%2F%2Fexample.com%2Fa%20b%2F"
+  );
+});
+
+test("buildShareUrls: note の共有URLを、URLをエンコードして組み立てる", () => {
+  const urls = buildShareUrls("https://example.com/a b/", "遊んで&笑える");
+  assert.equal(
+    urls.note,
+    "https://note.com/intent/post?url=https%3A%2F%2Fexample.com%2Fa%20b%2F"
+  );
 });
 
 test("formatDate: YYYY/MM/DD 形式にする", () => {
