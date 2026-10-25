@@ -20,6 +20,8 @@ flowchart LR
   X["ロジックのテスト<br>tests/logic.test.js"] -.->|node --test| L
   O["OGP画像の元<br>tools/ogp.html"] -.->|Edge で 1200x630 に撮影| P["OGP画像<br>ogp.png"]
   P -->|"og:image（SNSでシェアしたときのカード）"| I
+  F["ファビコンの元<br>tools/favicon.html"] -.->|"Edge で 512x512 に撮影 → 縮小"| FI["ファビコン<br>images/icons/"]
+  FI --> I
 ```
 
 OGP画像の撮り直し（Windows / Edge）:
@@ -27,6 +29,14 @@ OGP画像の撮り直し（Windows / Edge）:
 ```
 msedge --headless --hide-scrollbars --window-size=1200,630 --screenshot=ogp.png tools/ogp.html
 ```
+
+ファビコンの作り直し: `tools/favicon.html` を同じ方法で 512x512 に撮影し、48px（`icon-48.png`、検索結果用）・192px（`icon-192.png`）・180px（`apple-touch-icon.png`、iPhone のホーム画面用）に縮小して `images/icons/` に置く（Windows PowerShell の System.Drawing で縮小した）。
+
+## 検索エンジン向けの設定
+
+- `index.html` に title・description・canonical（`https://sakuichi.github.io/portfolio/`）を指定している。
+- `tools/` のHTMLは画像を作るための作業用ページなので `noindex` を付けている。
+- `.nojekyll` を置いて GitHub Pages の Jekyll 変換を止めている（止めないと `docs/architecture.md` が HTML ページとして公開され、検索結果に出るおそれがある）。
 
 ## 受け渡すデータ
 

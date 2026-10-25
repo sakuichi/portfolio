@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>ファビコンの元</title>
+  <!--
+    ファビコン（../images/icons/）の元になるページ。512x512 で撮影してから縮小する。
+    手順は docs/architecture.md を参照。
+  -->
+  <style>
+    body {
+      width: 512px;
+      height: 512px;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#5577cc, #224488);
+    }
+
+    .mark {
+      font-family: "Yu Gothic", "YuGothic", "Meiryo", sans-serif;
+      font-size: 420px;
+      font-weight: 900;
+      line-height: 1;
+      color: #ffee00;
+      text-shadow:
+        14px 14px 0 #000, -14px 14px 0 #000, 14px -14px 0 #000, -14px -14px 0 #000,
+        0 14px 0 #000, 0 -14px 0 #000, 14px 0 0 #000, -14px 0 0 #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="mark">倉</div>
+</body>
+</html>
