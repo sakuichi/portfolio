@@ -1,0 +1,364 @@
+/* 2000年代の個人サイト・Flashポータル風 */
+
+:root {
+  --bg-a: #cfe6ff;
+  --bg-b: #e8f3ff;
+  --frame: #224488;
+  --panel: #ffffff;
+  --text: #222222;
+  --sub-text: #666666;
+  --link: #0000ee;
+  --link-visited: #551a8b;
+  --link-hover: #ff3300;
+  --accent: #ff6600;
+  --accent-light: #ffcc33;
+  --new: #ff0000;
+  --line: #99aacc;
+  --box-bg: #f4f8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  color: var(--text);
+  font-family: "MS PGothic", "ＭＳ Ｐゴシック", Osaka, "Hiragino Kaku Gothic ProN", sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  background-color: var(--bg-a);
+  background-image:
+    linear-gradient(45deg, var(--bg-b) 25%, transparent 25%, transparent 75%, var(--bg-b) 75%),
+    linear-gradient(45deg, var(--bg-b) 25%, transparent 25%, transparent 75%, var(--bg-b) 75%);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+a {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--panel);
+  border: 3px double var(--frame);
+}
+
+/* ヘッダー */
+
+.site-header {
+  padding: 16px 12px 8px;
+  text-align: center;
+  background: linear-gradient(#fffbe6, #ffffff);
+  border-bottom: 2px solid var(--frame);
+}
+
+.logo {
+  margin: 0;
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+.logo span {
+  display: inline-block;
+  color: #ffffff;
+  text-shadow:
+    2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000,
+    4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.logo span:nth-child(5n + 1) { color: #ff3333; }
+.logo span:nth-child(5n + 2) { color: #ff9900; }
+.logo span:nth-child(5n + 3) { color: #ffee00; }
+.logo span:nth-child(5n + 4) { color: #33cc33; }
+.logo span:nth-child(5n + 5) { color: #3399ff; }
+
+.catch {
+  margin: 6px 0 10px;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #000033;
+  color: #ffff66;
+  border: 1px solid var(--frame);
+  padding: 2px 0;
+}
+
+.ticker span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker 18s linear infinite;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.status {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--sub-text);
+}
+
+/* 2段組み */
+
+.layout {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.side {
+  flex: 0 0 170px;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+.box {
+  margin-bottom: 12px;
+  border: 1px solid var(--frame);
+  background: var(--box-bg);
+}
+
+.box-title {
+  margin: 0;
+  padding: 3px 6px;
+  font-size: 13px;
+  color: #ffffff;
+  background: linear-gradient(#5577cc, var(--frame));
+}
+
+.menu {
+  margin: 0;
+  padding: 6px 6px 6px 22px;
+  list-style: "・";
+}
+
+.menu li {
+  padding: 2px 0;
+}
+
+.box-text {
+  margin: 0;
+  padding: 6px;
+  font-size: 12px;
+}
+
+/* セクション */
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  margin: 0 0 8px;
+  padding: 4px 8px;
+  font-size: 15px;
+  color: #ffffff;
+  text-shadow: 1px 1px 0 #993300;
+  background: linear-gradient(to right, var(--accent), var(--accent-light));
+  border-left: 6px solid #cc3300;
+}
+
+.empty {
+  color: var(--sub-text);
+  text-align: center;
+}
+
+/* 作品 */
+
+.work {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.work:last-child {
+  border-bottom: none;
+}
+
+/* OGP 画像（1200x630）と同じ比率 */
+.thumb {
+  flex: 0 0 160px;
+  width: 160px;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px outset #cccccc;
+  background: #eeeeee;
+  text-decoration: none;
+}
+
+/* 比率の違う画像（unityroom のアイコンなど）も切らずに収める */
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.no-image {
+  color: #999999;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.work-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.work-title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.work-desc {
+  margin: 4px 0;
+}
+
+.work-meta {
+  font-size: 11px;
+  color: var(--sub-text);
+}
+
+.platform {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 0 6px;
+  color: #ffffff;
+  background: var(--frame);
+  border-radius: 2px;
+}
+
+.new-mark {
+  margin-left: 6px;
+  color: var(--new);
+  font-size: 12px;
+  font-weight: bold;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { visibility: hidden; }
+}
+
+/* 更新履歴 */
+
+.history {
+  max-height: 160px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px 8px;
+  list-style: none;
+  border: 2px inset #cccccc;
+  background: #fffff0;
+}
+
+.history li {
+  padding: 2px 0;
+}
+
+.history-date {
+  margin-right: 8px;
+  color: var(--sub-text);
+}
+
+/* 管理人 */
+
+.profile {
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--box-bg);
+}
+
+.profile p {
+  margin: 4px 0;
+}
+
+/* フッター */
+
+.site-footer {
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--sub-text);
+  border-top: 2px solid var(--frame);
+}
+
+.site-footer p {
+  margin: 2px 0;
+}
+
+.copyright {
+  margin-top: 6px;
+}
+
+/* スマホ：メニューを上に、文字を少し大きく */
+
+@media (max-width: 600px) {
+  body {
+    padding: 8px;
+    font-size: 15px;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .layout {
+    flex-direction: column;
+  }
+
+  .side {
+    flex: none;
+  }
+
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+  }
+
+  .thumb {
+    flex-basis: 120px;
+    width: 120px;
+    height: 63px;
+  }
+}
+
+/* 動きを減らす設定の人には点滅・スクロールを止める */
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker span {
+    padding-left: 0;
+    animation: none;
+  }
+
+  .new-mark {
+    animation: none;
+  }
+}

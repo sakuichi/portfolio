@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>おもしろゲーム倉庫</title>
+  <meta name="description" content="遊んで笑えるゲームとWebサイトを置いている個人サイトです。">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page">
+
+    <header class="site-header">
+      <h1 class="logo">
+        <span>お</span><span>も</span><span>し</span><span>ろ</span><span>ゲ</span><span>ー</span><span>ム</span><span>倉</span><span>庫</span>
+      </h1>
+      <p class="catch">～ 遊んで笑えるゲームがいっぱい！ ～</p>
+      <div class="ticker" aria-hidden="true">
+        <span>ようこそ！おもしろゲーム倉庫へ！　ゆっくりしていってね！　気に入った作品があったら友達にも教えてね！</span>
+      </div>
+      <p class="status">
+        現在の作品数：<strong id="work-count">0</strong> 本　｜　最終更新：<strong id="last-updated">----/--/--</strong>
+      </p>
+    </header>
+
+    <div class="layout">
+      <nav class="side">
+        <div class="box">
+          <h2 class="box-title">▼ メニュー</h2>
+          <ul class="menu">
+            <li><a href="#latest">最新作</a></li>
+            <li><a href="#games">ゲーム</a></li>
+            <li><a href="#web">Webサイト</a></li>
+            <li><a href="#history">更新履歴</a></li>
+            <li><a href="#profile">管理人について</a></li>
+          </ul>
+        </div>
+        <div class="box">
+          <h2 class="box-title">▼ お知らせ</h2>
+          <p class="box-text">当サイトはリンクフリーです。<br>報告はいりませんが、してくれると管理人が喜びます。</p>
+        </div>
+      </nav>
+
+      <main class="main">
+        <section id="latest" class="section">
+          <h2 class="section-title">★ 最新作 ★</h2>
+          <div id="latest-list"></div>
+        </section>
+
+        <section id="games" class="section">
+          <h2 class="section-title">■ ゲーム ■</h2>
+          <div id="game-list"></div>
+        </section>
+
+        <section id="web" class="section">
+          <h2 class="section-title">■ Webサイト ■</h2>
+          <div id="web-list"></div>
+        </section>
+
+        <section id="history" class="section">
+          <h2 class="section-title">◆ 更新履歴 ◆</h2>
+          <ul id="history-list" class="history"></ul>
+        </section>
+
+        <section id="profile" class="section">
+          <h2 class="section-title">● 管理人について ●</h2>
+          <div class="profile">
+            <p><strong>管理人：</strong>さく1（<a href="https://x.com/saku_ichi" target="_blank" rel="noopener">@saku_ichi</a>）</p>
+            <p>思いついた一発ネタを、ゲームやWebサイトにして置いています。遊んで笑ってもらえたらうれしいです。</p>
+            <p><strong>ご感想・お仕事のご相談：</strong><a href="https://x.com/saku_ichi" target="_blank" rel="noopener">X（@saku_ichi）</a>のDMまでお気軽にどうぞ。</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <p><a href="#">▲ ページの先頭へ</a></p>
+      <p>※当サイトは「おもしろフラッシュ倉庫」のパロディです。本家とは一切関係ありません。</p>
+      <p class="copyright">Copyright &copy; おもしろゲーム倉庫 All Rights Reserved.</p>
+    </footer>
+
+  </div>
+
+  <script src="data/works.js"></script>
+  <script src="data/news.js"></script>
+  <script src="js/logic.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
