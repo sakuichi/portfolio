@@ -17,6 +17,14 @@ flowchart LR
   I -->|外部リンク| U["unityroom の各作品"]
   I -->|外部リンク| S["Web作品の各URL"]
   X["ロジックのテスト<br>tests/logic.test.js"] -.->|node --test| L
+  O["OGP画像の元<br>tools/ogp.html"] -.->|Edge で 1200x630 に撮影| P["OGP画像<br>ogp.png"]
+  P -->|"og:image（SNSでシェアしたときのカード）"| I
+```
+
+OGP画像の撮り直し（Windows / Edge）:
+
+```
+msedge --headless --hide-scrollbars --window-size=1200,630 --screenshot=ogp.png tools/ogp.html
 ```
 
 ## 受け渡すデータ

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>OGP画像の元</title>
+  <!--
+    OGP画像（../ogp.png, 1200x630）の元になるページ。
+    文言を変えたら、以下で撮り直す（Windows / Edge）:
+    msedge --headless --hide-scrollbars --window-size=1200,630 --screenshot=ogp.png tools/ogp.html
+  -->
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      width: 1200px;
+      height: 630px;
+      margin: 0;
+      padding: 40px 60px;
+      overflow: hidden;
+      background-size: 48px 48px;
+      background-position: 0 0, 24px 24px;
+    }
+
+    .card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#fffbe6, #ffffff);
+      border: 8px double var(--frame);
+      box-shadow: 10px 10px 0 rgba(34, 68, 136, 0.35);
+    }
+
+    .badge {
+      margin-bottom: 18px;
+      font-size: 28px;
+    }
+
+    .badge .new-mark {
+      animation: none;
+      font-size: 34px;
+    }
+
+    .logo {
+      font-size: 112px;
+      letter-spacing: 4px;
+    }
+
+    .logo span {
+      text-shadow:
+        5px 5px 0 #000, -5px 5px 0 #000, 5px -5px 0 #000, -5px -5px 0 #000,
+        0 5px 0 #000, 0 -5px 0 #000, 5px 0 0 #000, -5px 0 0 #000,
+        10px 10px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .catch {
+      margin: 22px 0 28px;
+      font-size: 40px;
+    }
+
+    .ticker {
+      width: 86%;
+      padding: 8px 0;
+      font-size: 28px;
+      text-align: center;
+    }
+
+    .url {
+      margin-top: 22px;
+      font-size: 26px;
+      color: var(--sub-text);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge"><span class="platform">ゲーム</span><span class="platform">Webサイト</span><span class="new-mark">NEW!</span></div>
+    <div class="logo">
+      <span>お</span><span>も</span><span>し</span><span>ろ</span><span>ゲ</span><span>ー</span><span>ム</span><span>倉</span><span>庫</span>
+    </div>
+    <p class="catch">～ 遊んで笑えるゲームがいっぱい！ ～</p>
+    <div class="ticker">一発ネタなゲーム・Webサイト置き場</div>
+    <div class="url">sakuichi.github.io/portfolio</div>
+  </div>
+</body>
+</html>
